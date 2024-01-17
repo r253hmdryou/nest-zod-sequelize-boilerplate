@@ -39,7 +39,7 @@ async function bootstrap() {
       .build();
     patchNestJsSwagger();
     const document = SwaggerModule.createDocument(app, config);
-    fs.writeFileSync('./dist/swagger-spec.yaml', dump(document));
+    await fs.promises.writeFile('./dist/swagger-spec.yaml', dump(document));
     SwaggerModule.setup('api', app, document);
   }
 
