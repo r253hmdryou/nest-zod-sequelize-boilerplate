@@ -1,0 +1,14 @@
+[pr_reviewer] # /review #
+extra_instructions="""
+日本語で回答してください
+"""
+
+[pr_description] # /describe #
+extra_instructions="""
+日本語で回答してください
+"""
+
+[pr_code_suggestions] # /improve #
+extra_instructions="""
+日本語で回答してください
+"""
