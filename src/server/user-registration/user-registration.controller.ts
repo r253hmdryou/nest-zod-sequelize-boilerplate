@@ -18,7 +18,7 @@ export class UserRegistrationController {
     operationId: 'registerUserRequest',
     summary: 'Register a new user with email address',
     description:
-      'Register a new user with email address.system will send a confirmation email to the user.',
+      'Registers a new user using their email address. The system sends an email containing a confirmation token to the user.',
   })
   @ApiOkResponse()
   async register(@Body() dto: UserRegistrationDto): Promise<void> {
@@ -29,9 +29,9 @@ export class UserRegistrationController {
   @Post('confirm')
   @ApiOperation({
     operationId: 'confirmRegistrationToken',
-    summary: 'Confirm a user with a token sent to the user by email',
+    summary: 'Confirm a user with a token sent to the user by email (Optional)',
     description:
-      'Confirm a user with a token sent to the user by email.notice: it only checks the token is valid or not. if you want to set a password to login, use /users/password endpoint.',
+      "This endpoint is optional and is used to confirm a user's registration using a token sent by email. It only checks if the token is valid. However, this step can be bypassed as token validity is also confirmed during the password setting process.",
   })
   @ApiOkResponse({ type: TokenConfirmationResponseDto })
   async confirm(
@@ -44,7 +44,8 @@ export class UserRegistrationController {
   @ApiOperation({
     operationId: 'setPassword',
     summary: 'Set a password to login',
-    description: 'Set a password to login.',
+    description:
+      'This endpoint allows the user to set a password for login. If the token is invalid, the user is prompted to re-register.',
   })
   @ApiOkResponse()
   async setPassword(@Body() dto: SetPasswordDto): Promise<void> {
