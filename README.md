@@ -7,6 +7,12 @@ $ npm ci
 ## Running the app
 
 ```bash
+# db setup (development)
+$ docker-compose up -d
+$ npm run build:db
+$ npm run db:migrate
+$ npm run db:seed
+
 # development
 $ npm run start
 

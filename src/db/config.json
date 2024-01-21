@@ -1,0 +1,16 @@
+{
+  "local": {
+    "use_env_variable": "RDB_URI_ADMIN",
+    "timezone": "UTC",
+    "seederStorage": "sequelize"
+  },
+  "development": {
+    "use_env_variable": "RDB_URI_ADMIN",
+    "timezone": "UTC",
+    "seederStorage": "sequelize"
+  },
+  "production": {
+    "use_env_variable": "RDB_URI_ADMIN",
+    "timezone": "UTC"
+  }
+}

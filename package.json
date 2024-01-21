@@ -7,11 +7,18 @@
   "license": "UNLICENSED",
   "scripts": {
     "verify": "run-s format lint test test:e2e",
-    "build": "nest build",
+    "build": "run-s build:*",
+    "build:nest": "nest build",
+    "build:db": "run-s build:db:*",
+    "build:db:ts": "tsc -p tsconfig.db.json",
+    "build:db:config": "cp src/db/config.json dist/db/config.json",
+    "db:migrate": "dotenv sequelize db:migrate",
+    "db:unmigrate": "dotenv sequelize db:migrate:undo",
+    "db:seed": "dotenv sequelize db:seed:all",
     "format": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
     "format:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start --entryFile server/main.js",
-    "start:dev": "nest start --watch --entryFile server/main.js",
+    "start:dev": "dotenv nest start -- --watch --entryFile server/main.js",
     "start:debug": "nest start --debug --watch --entryFile server/main.js",
     "start:prod": "node dist/server/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
@@ -78,6 +85,11 @@
       "ts"
     ],
     "rootDir": "src",
+    "moduleDirectories": [
+      "node_modules",
+      "src/server",
+      "test"
+    ],
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
