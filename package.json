@@ -18,7 +18,7 @@
     "format": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
     "format:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start --entryFile server/main.js",
-    "start:dev": "nest start --watch --entryFile server/main.js",
+    "start:dev": "dotenv nest start -- --watch --entryFile server/main.js",
     "start:debug": "nest start --debug --watch --entryFile server/main.js",
     "start:prod": "node dist/server/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
