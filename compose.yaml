@@ -1,0 +1,25 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: boiler-db
+    hostname: boiler-db
+    networks:
+      - boiler
+    volumes:
+      - boiler-mysql-data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    env_file:
+      - .env
+    environment:
+      tz: UTC
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+
+volumes:
+  boiler-mysql-data:
+    driver: local
+    external: false
+
+networks:
+  boiler:
+    driver: bridge
