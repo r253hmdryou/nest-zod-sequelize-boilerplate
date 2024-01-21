@@ -6,7 +6,7 @@ import { AllExceptionsFilter } from 'share/filters/exception.filter';
 
 export async function createApp(): Promise<INestApplication> {
   const app = await NestFactory.create(AppModule, {
-    logger: getLoggerOption(),
+    logger: getLoggerOption(process.env.APP_LOGGER),
   });
 
   const { httpAdapter } = app.get(HttpAdapterHost);
@@ -16,8 +16,7 @@ export async function createApp(): Promise<INestApplication> {
   return app;
 }
 
-function getLoggerOption() {
-  const env = process.env.APP_LOGGER;
+function getLoggerOption(env: string | undefined) {
   if (env === undefined) {
     return undefined;
   }
