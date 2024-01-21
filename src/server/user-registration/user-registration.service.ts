@@ -1,7 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserRegistrationRepository } from './user-registration.repository';
 import { BcryptService } from 'vendors/bcrypt/bcrypt.service';
 import { JwtService } from '@nestjs/jwt';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UserRegistrationService {
@@ -27,13 +32,19 @@ export class UserRegistrationService {
 
   async setPassword(token: string, password: string): Promise<void> {
     const payload = this.verifyToken(token);
+    const email = payload.email;
+    if (email === undefined || !(typeof email === 'string')) {
+      throw new UnauthorizedException();
+    }
+    if (await this.repository.existsByEmail(email)) {
+      throw new ConflictException();
+    }
     const passwordHash = await this.bcrypt.hash(password, 10);
 
-    // TODO: factory method
-    const user = {
-      email: payload.email,
-      passwordHash,
-    };
+    const user = UserEntity.factory({
+      email: email,
+      passwordHash: passwordHash,
+    });
     this.repository.save(user);
   }
 

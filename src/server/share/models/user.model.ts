@@ -13,8 +13,8 @@ export class UserModel extends Model<
 > {
   declare id: CreationOptional<bigint>;
   declare uuid: string;
-  declare email: string | null;
-  declare passwordHash: string | null;
+  declare email: string;
+  declare passwordHash: string;
   declare createdAt: Date;
 }
 
@@ -37,7 +37,7 @@ UserModel.init(
     },
     passwordHash: {
       type: DataTypes.STRING(255),
-      allowNull: true,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,

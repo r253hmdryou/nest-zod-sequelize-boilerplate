@@ -18,7 +18,7 @@ export async function up(queryInterface: QueryInterface, _s: Sequelize) {
         type: DataTypes.STRING,
       },
       password_hash: {
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.STRING,
       },
       created_at: {
