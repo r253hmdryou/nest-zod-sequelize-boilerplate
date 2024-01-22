@@ -16,9 +16,7 @@ export class UserRegistrationService {
     private jwtService: JwtService,
   ) {}
   async create(email: string): Promise<void> {
-    const token = await this.jwtService.signAsync({
-      email: email,
-    });
+    const token = this.issueToken(email);
     // TODO: send email with confirmation link
     console.log(`send email to ${email} with confirmation link`);
     console.log(token);
@@ -48,7 +46,11 @@ export class UserRegistrationService {
     this.repository.save(user);
   }
 
-  private verifyToken(token: string) {
+  issueToken(email: string): string {
+    return this.jwtService.sign({ email: email });
+  }
+
+  verifyToken(token: string) {
     try {
       return this.jwtService.verify(token);
     } catch (e) {

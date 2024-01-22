@@ -11,4 +11,8 @@ extra_instructions="""
 [pr_code_suggestions] # /improve #
 extra_instructions="""
 日本語で回答してください
+追加で以下の観点でもレビューをしてください
+- 意味のあるテストか（モックをテストしていないか）
+- 関数が長すぎないか
+- 適切な英語が使われているかどうか（文法的な誤り等）
 """

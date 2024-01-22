@@ -29,9 +29,6 @@ export abstract class Entity<T extends PropertiesCore> {
   }
 
   get id(): bigint {
-    if (this.properties.id === undefined) {
-      throw new Error('id is undefined');
-    }
-    return this.properties.id;
+    return this.getOptionalProperty(this.properties.id);
   }
 }

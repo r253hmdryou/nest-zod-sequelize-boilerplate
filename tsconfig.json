@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "*": ["src/server/*"],
+      "*": ["src/server/*", "test/*"],
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
